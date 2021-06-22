@@ -27,7 +27,7 @@ Some of these decisions are subject to change; they just form an initial guideli
 
 ## 10000 Foot View
 
--   ./debug = Helpful files generated on compile/runtime that aid with debugging SpartanOS
+-   ./\_debug = Helpful files generated on compile/runtime that aid with debugging SpartanOS
 -   ./drivers = Mostly 3rd party device code ported to be compatible with SpartanOS, see individual files for attribution.
 -   ./kernel = The core logic of SpartanOS
 -   ./kernel/includes = The header files for SpartanOS
