@@ -2,7 +2,7 @@
 
 WIP: Educational OS Project
 
-Disclaimer: This is not going to replace Linux. This might have serious bugs. Even if this wasn't a WIP you probably won't be doing any serious work in this OS any time soon.
+Disclaimer: This is not going to replace Linux. This might have serious bugs. Even if this wasn't a WIP you probably won't be doing any serious work in this OS any time soon. Only the 64bit version currently works.
 
 ## Why SpartanOS
 
@@ -37,8 +37,7 @@ Some of these decisions are subject to change; they just form an initial guideli
 ## Roadmap
 
 -   [x] 'Boot' into kernel targeting 'sifive_e' machine on QEMU
--   [ ] Print a message on 'sifive_e' target on QEMU
-    -   Currently only the virt driver is working. Need to get a working sifive_e driver working which will help port to real hardware when the time comes.
+-   [x] Print a message on 'sifive_e' target on QEMU
 -   [ ] Timer interrupts
 -   [ ] Processes
 -   [ ] Simple Multi-Tasking

@@ -53,3 +53,5 @@ dkms.conf
 
 _debug/*
 kernel/kernel
+ref.asm
+.gdb_history
