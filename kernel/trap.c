@@ -1,13 +1,9 @@
 #include <trap.h>
 #include <uart.h>
-#include <bufprint.h>
+#include <dprintf.h>
 
 #define die(str, ...) ({ \
-	char a[300]; \
-	bufprintf(a, "%s:%d: " str "\n", __FILE__, __LINE__, ##__VA_ARGS__); \
-	for (char *c = a; *c; c++) { \
-		uart_putc_sync(*c); \
-	} \
+	dprintf(300, "%s:%d: " str "\n", __FILE__, __LINE__, ##__VA_ARGS__); \
 	asm volatile("1: j 1b"); })
 
 
