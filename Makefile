@@ -19,20 +19,21 @@ else
 	MACHINE = virt
 endif
 
-# ifdef TBITS
-# 	BITS = 32
-# 	MABI = -mabi=ilp32
-# else
+ifdef TBITS
+ 	BITS = 32
+ 	MABI = -mabi=ilp32
+ 	32OPTIN = -m elf32lriscv
+else
 	BITS = 64
 	MABI = -mabi=lp64
-# endif
+endif
 
 GDBPORT = 2950
 K = kernel
 D = drivers
 L = library
 _D = _debug
-PLATFORM = riscv64-unknown-linux-gnu
+PLATFORM = riscv64-unknown-elf
 
 # Dynamically generate object file lists
 KERNEL_FILES = $(shell ls $(K)/*.[S,c] | sed -e "s/\.[S,c]/.o/g")
@@ -52,7 +53,7 @@ OBJDUMP = $(PLATFORM)-objdump
 CFLAGS = -Wall -Werror -O -fno-omit-frame-pointer -ggdb -I./$(K)/includes
 CFLAGS += -march=rv$(BITS)imac $(MABI) -mcmodel=medany  -ffreestanding -fno-common -nostdlib -mno-relax
 ASFLAGS = -march=rv$(BITS)imac $(MABI) -mcmodel=medany -I./$(K)/includes/asm/riscv$(BITS)
-LDFLAGS = -z max-page-size=4096
+LDFLAGS = $(32OPTIN) -z max-page-size=4096
 
 QEMUFLAGS = -machine $(MACHINE) -bios none -kernel $(K)/$(K) -m 128M -nographic
 
@@ -73,8 +74,12 @@ debug: clean $(K)/$(K)
 	@echo "*** Ready for GDB to connect @ tcp:$(GDBPORT)." 1>&2
 	$(QEMU) $(QEMUFLAGS) -S -gdb tcp::$(GDBPORT)
 
+walkthrough: clean $(K)/$(K)
+	$(QEMU) $(QEMUFLAGS) -S -gdb tcp::$(GDBPORT) &
+	$(PLATFORM)-gdb --batch -e kernel/kernel -q -x _debug/walkthrough.gdb > _debug/walkthrough.txt
+	pkill qemu
+
 clean:
-	rm -rf $(_D)/*
 	rm -rf $(K)/*.o
 	rm -rf $(L)/*.o
 	rm -rf $(D)/*.o

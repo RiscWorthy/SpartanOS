@@ -3,10 +3,12 @@
 #include <memory.h>
 #include <trap.h>
 
+#define VERSION "0.1.1\n"
+
 // Prints a simple test message to show the uart is working...
 void print_test_message(){
 	char a[40];
-	bufprintf(a, "\nSpartanOS Version: %s\n\0", "0.1.0\n");
+	bufprintf(a, "\nSpartanOS Version: %s\n\0", VERSION);
 	for (char *c = a; *c; c++) {
 		uart_putc_sync(*c);
 	}
