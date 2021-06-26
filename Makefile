@@ -1,5 +1,4 @@
-# This build script is currently designed for RISC-V64...
-# The V32 support is not currently working
+# This build script is currently designed for RISC-V
 
 # Input params 
 #  - TARGET
