@@ -77,6 +77,7 @@ walkthrough: clean $(K)/$(K)
 	$(QEMU) $(QEMUFLAGS) -S -gdb tcp::$(GDBPORT) &
 	$(PLATFORM)-gdb --batch -e kernel/kernel -q -x _debug/walkthrough.gdb > _debug/walkthrough.txt
 	pkill qemu
+	@echo "\nWalkthrough completed successfuly. To review walkthrough:\n\tcat _debug/walkthrough.txt | more"
 
 clean:
 	rm -rf $(K)/*.o
