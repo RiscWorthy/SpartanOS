@@ -2,7 +2,7 @@
 
 WIP: Educational OS Project
 
-Disclaimer: This is not going to replace Linux. This might have serious bugs. Even if this wasn't a WIP you probably won't be doing any serious work in this OS any time soon. Only the 64bit version currently works.
+Disclaimer: This is not going to replace Linux. This might have serious bugs. Even if this wasn't a WIP you probably won't be doing any serious work in this OS any time soon.
 
 ## Why SpartanOS
 
