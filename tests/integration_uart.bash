@@ -1,6 +1,7 @@
 # This script checks the four major supported environments...
 # virt (32 and 64) and sifive_e (32 and 64)
 # ... to see if they support uart correctly
+# Call this script via "make test-uart"
 
 # Since SpartanOS begins with a print statement, "SpartanOS Version:..."
 # This makes for a feasible integration test. This text should be present in the
