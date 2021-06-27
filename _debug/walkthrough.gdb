@@ -1,3 +1,9 @@
+# This script, called via "make walkthrough", instruments all functions in remote
+# and then non-interactively prints helpful info as each function is entered
+# until spin is entered and then the script quits
+# Script output is logged to _debug/walkthrough.txt
+
+
 file kernel/kernel
 set style enabled on
 
