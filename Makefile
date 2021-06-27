@@ -27,6 +27,12 @@ else
 	MABI = -mabi=lp64
 endif
 
+ifdef LOGFILE
+	LFILE = $(LOGFILE)
+else
+	LFILE = serial.log
+endif
+
 GDBPORT = 2950
 K = kernel
 D = drivers
@@ -56,7 +62,6 @@ LDFLAGS = $(32OPTIN) -z max-page-size=4096
 
 QEMUFLAGS = -machine $(MACHINE) -bios none -kernel $(K)/$(K) -m 128M -nographic
 
-
 .PHONY: debug
 
 kernel/kernel: $(OBJECT_FILES) $(K)/linker-$(MACHINE).ld
@@ -67,7 +72,7 @@ kernel/kernel: $(OBJECT_FILES) $(K)/linker-$(MACHINE).ld
 	@echo "\n\n\t$(MACHINE)\n\t\tbuild finished...\n"
 
 emulate: clean $(K)/$(K)
-	$(QEMU) $(QEMUFLAGS)
+	$(QEMU) $(QEMUFLAGS) | tee $(LFILE)
 
 debug: clean $(K)/$(K)
 	@echo "*** Ready for GDB to connect @ tcp:$(GDBPORT)." 1>&2
@@ -78,6 +83,11 @@ walkthrough: clean $(K)/$(K)
 	$(PLATFORM)-gdb --batch -e kernel/kernel -q -x _debug/walkthrough.gdb > _debug/walkthrough.txt
 	pkill qemu
 	@echo "\nWalkthrough completed successfuly. To review walkthrough:\n\tcat _debug/walkthrough.txt | more"
+
+test-uart:
+	bash -e tests/integration_uart.bash
+
+test: test-uart
 
 clean:
 	rm -rf $(K)/*.o

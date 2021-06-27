@@ -54,6 +54,8 @@ dkms.conf
 _debug/*.asm
 _debug/*.sym
 _debug/*.txt
+serial.log
+tests/_out/*
 kernel/kernel
 ref.asm
 .gdb_history
