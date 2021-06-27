@@ -64,8 +64,8 @@ QEMUFLAGS = -machine $(MACHINE) -bios none -kernel $(K)/$(K) -m 128M -nographic
 
 .PHONY: debug
 
-kernel/kernel: $(OBJECT_FILES) $(K)/linker-$(MACHINE).ld
-	$(LD) $(LDFLAGS) -T $(K)/linker-$(MACHINE).ld -o $(K)/$(K) $(OBJECT_FILES)
+kernel/kernel: $(OBJECT_FILES) $(K)/linker/$(MACHINE).ld
+	$(LD) $(LDFLAGS) -T $(K)/linker/$(MACHINE).ld -o $(K)/$(K) $(OBJECT_FILES)
 	mkdir -p $(_D)
 	$(OBJDUMP) -S $(K)/$(K) > $(_D)/$(K).asm
 	$(OBJDUMP) -t $(K)/$(K) | sed '1,/SYMBOL TABLE/d; s/ .* / /; /^$$/d' > $(_D)/$(K).sym

@@ -31,6 +31,7 @@ Some of these decisions are subject to change; they just form an initial guideli
 -   ./drivers = Mostly 3rd party device code ported to be compatible with SpartanOS, see individual files for attribution.
 -   ./kernel = The core logic of SpartanOS
 -   ./kernel/includes = The header files for SpartanOS
+-   ./kernel/linker = The linker files for SpartanOS
 -   ./library = Reuseable assembly functions ported from various resources, see individual files for attribution.
 -   ./tests = Tests to verify the correctness of SpartanOS
 

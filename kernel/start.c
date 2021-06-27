@@ -3,7 +3,7 @@
 #include <memory.h>
 #include <trap.h>
 
-#define VERSION "0.1.1\n"
+#define VERSION "0.1.2\n"
 
 // crt0.S yields to start to initialize the system...
 void start() {
