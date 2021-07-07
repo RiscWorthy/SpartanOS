@@ -84,10 +84,16 @@ walkthrough: clean $(K)/$(K)
 	pkill qemu
 	@echo "\nWalkthrough completed successfuly. To review walkthrough:\n\tcat _debug/walkthrough.txt | more"
 
-test-uart:
-	bash -e tests/integration_uart.bash
+test-setup:
+	@bash -e tests/integration_setup.bash
 
-test: test-uart
+test-timer: test-setup
+	@bash -e tests/integration_timer.bash
+
+test-uart: test-setup
+	@bash -e tests/integration_uart.bash
+
+test: test-uart test-timer
 
 clean:
 	rm -rf $(K)/*.o
