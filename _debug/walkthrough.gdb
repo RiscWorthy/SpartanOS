@@ -19,8 +19,9 @@ commands
 	# Problems printing stack frame currently on 64bit sifive_e, and 32bit virt and sifive_e
 	# echo \n\033[01;31mFrame\033[01;0m:\n
 	# i fr
-	echo \n\033[01;31mStack\033[01;0m:\n
-	i stack
+	# Problems printing stack currently on 32bit sifive_e, pc not saved...
+	# echo \n\033[01;31mStack\033[01;0m:\n
+	# i stack
 	if $sp != 0
 		echo \n\033[01;31mStack Print\033[01;0m:\n
 		x/20xg $sp
