@@ -1,6 +1,7 @@
 //
 // low-level driver routines for SiFive UART.
 //
+#include <types.h>
 
 #define TXEN    			(1 << 0)
 #define TXDATA_FULL   		(1 << 31)
@@ -11,8 +12,8 @@
 #define TXCTRL 				8
 #define RXCTRL 				12
 #define DIV 				24
-#define SET_ADDR(num, val) *(unsigned int *)(UART0_ADDRESS + num) = val;
-#define READ_ADDR *(unsigned int *)(UART0_ADDRESS)
+#define SET_ADDR(num, val) *(u32 *)(UART0_ADDRESS + num) = val;
+#define READ_ADDR *(u32 *)(UART0_ADDRESS)
 
 // Initialize the uart0 device
 void uart_init(void) {
@@ -25,7 +26,7 @@ void uart_init(void) {
 }
 
 // Spin waiting for uart0 to print character.
-void uart_putc_sync(int c) {
+void uart_putc_sync(u32 c) {
 	/* Wait while TX FIFO is full */
 	while (READ_ADDR & TXDATA_FULL)
 		;

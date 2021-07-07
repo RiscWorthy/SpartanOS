@@ -6,6 +6,8 @@
 // some have different meanings for
 // read vs write.
 // see http://byterunner.com/16550.html
+#include <types.h>
+
 #define RHR 0                 // receive holding register (for input bytes)
 #define THR 0                 // transmit holding register (for output bytes)
 #define IER 1                 // interrupt enable register
@@ -22,7 +24,7 @@
 #define LSR_TX_IDLE (1<<5)    // THR can accept another character to send
 
 #define UART0 0x10000000L
-#define Reg(reg) ((volatile unsigned char *)(UART0 + reg))
+#define Reg(reg) ((volatile u8 *)(UART0 + reg))
 #define ReadReg(reg) (*(Reg(reg)))
 #define WriteReg(reg, v) (*(Reg(reg)) = (v))
 
@@ -49,7 +51,7 @@ void uart_init(void) {
 }
 
 // Spin waiting for uart0 to print character.
-void uart_putc_sync(int c) {
+void uart_putc_sync(u32 c) {
 	// wait for Transmit Holding Empty to be set in LSR.
 	while((ReadReg(LSR) & LSR_TX_IDLE) == 0)
 		;

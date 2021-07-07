@@ -30,7 +30,7 @@ _entry:
 	la      sp, stacks + STACK_SIZE
 	add     sp, sp, t0
 
-	# sleep spin all harts excpet hart 0
+	# sleep spin all harts except hart 0
 	csrr    a0, mhartid
 	bnez    a0, spin
 
@@ -87,6 +87,39 @@ trap_vector:
 	addi sp, sp, CONTEXT_SIZE
 
 	# Return
+	mret
+
+
+
+.globl timer_interrupt
+.align 4
+timer_interrupt:
+	# start.c has set up the memory that mscratch points to:
+	# scratch[0,8,16] : register save area.
+	csrrw a0, mscratch, a0
+	sx a1, 0(a0)
+	sx a2, 8(a0)
+	sx a3, 16(a0)
+
+	lx a1, 24(a0)
+	addi a1, a1, 1
+	sx a1, 24(a0)
+
+	li a1, 0x02004000
+	lx a2, 0(a1)
+	li a3, 0x1E8480
+	add a2, a2, a3
+	sx a2, 0(a1) 
+
+	# raise a machine software interrupt.
+	li a1, 2
+	csrw mip, a1
+
+	lx a3, 16(a0)
+	lx a2, 8(a0)
+	lx a1, 0(a0)
+	csrrw a0, mscratch, a0
+
 	mret
 
 .bss
