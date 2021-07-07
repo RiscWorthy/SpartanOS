@@ -39,7 +39,8 @@ Some of these decisions are subject to change; they just form an initial guideli
 
 -   [x] 'Boot' into kernel targeting 'sifive_e' machine on QEMU
 -   [x] Print a message on 'sifive_e' target on QEMU
--   [ ] Timer interrupts
+-   [x] Timer interrupts
+-   [ ] Keyboard Support
 -   [ ] Processes
 -   [ ] Simple Multi-Tasking
 -   [ ] SMP?
