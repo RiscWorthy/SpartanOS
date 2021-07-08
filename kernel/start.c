@@ -1,12 +1,13 @@
 #include <uart.h>
 #include <dprintf.h>
 #include <memory.h>
+#include <shell.h>
 #include <trap.h>
 #include <timer.h>
 #include <types.h>
 #include <cpu.h>
 
-#define VERSION "0.1.2\n"
+#define VERSION "0.1.3\n"
 
 // crt0.S yields to start to initialize the system...
 void start() {
@@ -19,6 +20,10 @@ void start() {
 	dprintf(43, "\nTIMER: Waiting for atleast 2 ticks...\n\0");
 	tick_stall(2);
 	dprintf(35, "\nTIMER: Fired atleast 2 times\n\0");
+
+	while(1) {
+		shell();
+	}
 
 	// ...system should be initialized now...
 }

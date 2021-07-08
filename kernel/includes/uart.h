@@ -7,4 +7,6 @@ void uart_init(void);
 
 void uart_putc_sync(i32 c);
 
+u32 uart_getc_sync(void);
+
 #endif /* UART_H */

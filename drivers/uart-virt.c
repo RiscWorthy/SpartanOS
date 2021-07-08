@@ -57,3 +57,13 @@ void uart_putc_sync(u32 c) {
 		;
 	WriteReg(THR, c);
 }
+
+// Spin until uart0 returns a valid character value.
+u32 uart_getc_sync(void) {
+	while(1) {
+		if(ReadReg(LSR) & 0x01){
+			// input data is ready.
+			return ReadReg(RHR);
+		}
+	}
+}
